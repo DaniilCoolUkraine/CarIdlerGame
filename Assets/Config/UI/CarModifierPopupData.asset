@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2552fc548bc6499eafddf41ad798ad35, type: 3}
   m_Name: CarModifierPopupData
   m_EditorClassIdentifier: 
-  Title: Add Vehicle
-  Description: Buying an extra vehicle would attract more visitors. Income increased
+  Title: Vroom Vroom
+  Description: More vehicles attract more visitors to the track. Income goes up with
+    every new car added

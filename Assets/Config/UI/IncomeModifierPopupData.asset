@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2552fc548bc6499eafddf41ad798ad35, type: 3}
   m_Name: IncomeModifierPopupData
   m_EditorClassIdentifier: 
-  Title: Money-money
-  Description: 'New sponsors helped us a lot. '
+  Title: Cha-Ching
+  Description: New sponsors stepped in to support the track. Each car now earns slightly
+    more per round

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2552fc548bc6499eafddf41ad798ad35, type: 3}
   m_Name: SpeedModifierPopupData
   m_EditorClassIdentifier: 
-  Title: Pit Stop!
-  Description: Trained staff managed to quicker cars. Each car recieve small speed
-    bost
+  Title: Zoom Juice
+  Description: Thanks to trained staff, cars now move faster. Each car gets a slight
+    speed increase
