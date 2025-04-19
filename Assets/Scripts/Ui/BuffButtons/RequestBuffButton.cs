@@ -1,29 +1,42 @@
 ﻿using SimpleEventBus.SimpleEventBus.Runtime;
 using SimpleGame.Events;
-using TMPro;
+using SimpleGame.Managers;
+using SimpleGame.Ui.Popups;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace SimpleGame.Ui.BuffButtons
 {
-    public class RequestBuffButton <T, K> : MonoBehaviour where T : IEvent, new() where K : PriceChanged
+    public class RequestBuffButton <T, K> : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+        where T : IEvent, new() where K : PriceChanged
     {
-        [SerializeField] private Button _button;
-        [SerializeField] private TextMeshProUGUI _priceText;
+        [SerializeField, Required] private Button _button;
+        [SerializeField, Required] private Image _icon;
+        [SerializeField, Required] private PopupData _hoveredPopupData;
+        
+        [SerializeField] private Color _inactiveColor;
+        
+        [Zenject.Inject] private ScoreManager _scoreManager;
+        [Zenject.Inject] private IPopupManager _popupManager;
+        
+        private int _price;
+        private bool _isFirstEvent = true;
 
         private void OnEnable()
         {
             _button.onClick.AddListener(OnButtonClick);
-            
-            GlobalEvents.AddListener<SpawnCarEvent>(OnCarSpawned);
+
+            GlobalEvents.AddListener<ScoreChangedEvent>(OnScoreChanged);
             GlobalEvents.AddListener<K>(OnPriceChanged);
         }
 
         private void OnDisable()
         {
             _button.onClick.RemoveListener(OnButtonClick);
-            
-            GlobalEvents.RemoveListener<SpawnCarEvent>(OnCarSpawned);
+
+            GlobalEvents.RemoveListener<ScoreChangedEvent>(OnScoreChanged);
             GlobalEvents.RemoveListener<K>(OnPriceChanged);
         }
 
@@ -32,14 +45,32 @@ namespace SimpleGame.Ui.BuffButtons
             GlobalEvents.Publish<T>(new T());
         }
         
-        private void OnCarSpawned(SpawnCarEvent ev)
+        private void OnScoreChanged(ScoreChangedEvent ev)
         {
-            _button.interactable = true;
+            if (_isFirstEvent)
+            {
+                _isFirstEvent = false;
+                return;
+            }
+
+            var canAfford = _scoreManager.CanAfford(_price);
+            _button.interactable = canAfford;
+            _icon.color = canAfford ? Color.white : _inactiveColor;
         }
-        
+
         private void OnPriceChanged(K ev)
         {
-            _priceText.text = ev.Price.ToString();
+            _price = ev.Price;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _popupManager.OpenPopup(_hoveredPopupData, _price);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _popupManager.ClosePopup();
         }
     }
 }
