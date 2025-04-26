@@ -1,5 +1,6 @@
 ﻿using SimpleEventBus.SimpleEventBus.Runtime;
 using SimpleGame.Events;
+using SimpleGame.General;
 using UnityEngine;
 
 namespace SimpleGame.Managers
@@ -55,11 +56,25 @@ namespace SimpleGame.Managers
         private void OnGatesPassed(GatesPassedEvent ev)
         {
             Score += _scoreMultiplier;
+            
+            var soundEvent = new SoundRequestEvent()
+            {
+                SoundType = ESoundType.GatesPassed
+            };
+
+            GlobalEvents.Publish<SoundRequestEvent>(soundEvent);
         }
         
         private void OnUpgradeIncome(UpgradeIncomeEvent ev)
         {
             _scoreMultiplier++;
+            
+            var soundEvent = new SoundRequestEvent()
+            {
+                SoundType = ESoundType.IncomeModifier
+            };
+
+            GlobalEvents.Publish<SoundRequestEvent>(soundEvent);
         }
     }
 }

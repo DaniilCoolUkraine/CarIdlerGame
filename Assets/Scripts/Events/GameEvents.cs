@@ -1,4 +1,5 @@
 ﻿using SimpleEventBus.SimpleEventBus.Runtime;
+using SimpleGame.General;
 
 namespace SimpleGame.Events
 {
@@ -64,5 +65,10 @@ namespace SimpleGame.Events
         public IncomePriceChanged(int price) : base(price)
         {
         }
+    }
+    
+    public class SoundRequestEvent : IEvent
+    {
+        public ESoundType SoundType;
     }
 }

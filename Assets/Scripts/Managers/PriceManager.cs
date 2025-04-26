@@ -1,6 +1,7 @@
 ﻿using System;
 using SimpleEventBus.SimpleEventBus.Runtime;
 using SimpleGame.Events;
+using SimpleGame.General;
 using UnityEngine;
 
 namespace SimpleGame.Managers
@@ -97,6 +98,13 @@ namespace SimpleGame.Managers
                 CurrentSpeedPrice += Mathf.Max(1, Mathf.RoundToInt(CurrentSpeedPrice * _speedPriceScaler));
                 
                 GlobalEvents.Publish(new UpgradeSpeedEvent());
+                
+                var soundEvent = new SoundRequestEvent()
+                {
+                    SoundType = ESoundType.SpeedModifier
+                };
+
+                GlobalEvents.Publish<SoundRequestEvent>(soundEvent);
             }
         }
         

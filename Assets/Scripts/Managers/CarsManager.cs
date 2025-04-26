@@ -1,6 +1,7 @@
 ﻿using SimpleEventBus.SimpleEventBus.Runtime;
 using SimpleGame.Events;
 using SimpleGame.Factories;
+using SimpleGame.General;
 using SimpleGame.Storages;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -40,6 +41,13 @@ namespace SimpleGame.Managers
             var spline = _splineFactory.CreateSpline();
             var car = _carFactory.CreateCar(spline);
             car.Play();
+            
+            var soundEvent = new SoundRequestEvent()
+            {
+                SoundType = ESoundType.CarModifier
+            };
+
+            GlobalEvents.Publish<SoundRequestEvent>(soundEvent);
         }
     }
 }

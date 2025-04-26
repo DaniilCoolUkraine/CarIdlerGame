@@ -1,5 +1,6 @@
 ﻿using SimpleEventBus.SimpleEventBus.Runtime;
 using SimpleGame.Events;
+using SimpleGame.General;
 using SimpleGame.Managers;
 using SimpleGame.Ui.Popups;
 using Sirenix.OdinInspector;
@@ -43,6 +44,13 @@ namespace SimpleGame.Ui.BuffButtons
         private void OnButtonClick()
         {
             GlobalEvents.Publish<T>(new T());
+            
+            var soundEvent = new SoundRequestEvent()
+            {
+                SoundType = ESoundType.UiClick
+            };
+
+            GlobalEvents.Publish<SoundRequestEvent>(soundEvent);
         }
         
         private void OnScoreChanged(ScoreChangedEvent ev)
@@ -66,6 +74,13 @@ namespace SimpleGame.Ui.BuffButtons
         public void OnPointerEnter(PointerEventData eventData)
         {
             _popupManager.OpenPopup(_hoveredPopupData, _price);
+
+            var soundEvent = new SoundRequestEvent()
+            {
+                SoundType = ESoundType.UiHover
+            };
+
+            GlobalEvents.Publish<SoundRequestEvent>(soundEvent);
         }
 
         public void OnPointerExit(PointerEventData eventData)
