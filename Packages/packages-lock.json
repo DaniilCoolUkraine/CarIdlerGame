@@ -7,20 +7,6 @@
       "dependencies": {},
       "hash": "06067cd4c83e372310d6f79d1c625f6870ff7a2a"
     },
-    "com.daniilcoolukraine.favourites": {
-      "version": "https://github.com/DaniilCoolUkraine/Favourites.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "fdbafe1d30a3079e3571d242bfa721405b4c34a8"
-    },
-    "com.daniilcoolukraine.projectsetuptools": {
-      "version": "https://github.com/DaniilCoolUkraine/ProjectSetupTools.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "b429478e81f21f3a33311db4f0cb6ce5d850f757"
-    },
     "com.daniilcoolukraine.simpleeventbus": {
       "version": "https://github.com/DaniilCoolUkraine/SimpleEventBus.git",
       "depth": 0,
