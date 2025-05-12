@@ -32,3 +32,19 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+
+  deploy:
+    name: GitHub Pages Deploy
+    runs-on: ubuntu-latest
+    needs: buildForAllSupportedPlatforms
+    steps:
+      - name: Download
+        uses: actions/download-artifact@v4
+        with:
+          name: Build-WebGL
+          path: webgl-build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: webgl-build
