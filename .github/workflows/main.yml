@@ -55,7 +55,7 @@ jobs:
           BUILD_TIME="$((DURATION/60))m $((DURATION%60))s"
           GH_PAGES_URL="https://${{github.repository_owner}}.github.io/${{github.repository.name}}/"
           BRANCH=${{github.ref_name}}
-          MESSAGE="Success %0A Build on branch ${BRANCH} finished with status \\"Success\\". Time taken: ${BUILD_TIME}. %0A [${GH_PAGES_URL}](${GH_PAGES_URL})"
+          MESSAGE="Success %0A Build on branch ${BRANCH} finished with status \\"Success\\" %0A Time taken: ${BUILD_TIME} %0A [${GH_PAGES_URL}](${GH_PAGES_URL})"
           curl -s -X POST "https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage" \
           -d chat_id=${{secrets.TELEGRAM_CHAT_ID}} \
           -d text="${MESSAGE}" \
@@ -66,7 +66,7 @@ jobs:
           BUILD_TIME="$((DURATION/60))m $((DURATION%60))s"
           GH_PAGES_URL="https://${{github.repository_owner}}.github.io/${{github.repository.name}}/"
           BRANCH=${{github.ref_name}}
-          MESSAGE="Failed %0A Build on branch ${BRANCH} finished with status \\"Failure\\". Time taken: ${BUILD_TIME}."
+          MESSAGE="Failed %0A Build on branch ${BRANCH} finished with status \\"Failure\\" %0A Time taken: ${BUILD_TIME}"
           curl -s -X POST "https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage" \
           -d chat_id=${{secrets.TELEGRAM_CHAT_ID}} \
           -d text="${MESSAGE}" \
