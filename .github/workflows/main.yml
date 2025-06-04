@@ -46,14 +46,12 @@ jobs:
           path: build/${{ matrix.targetPlatform }}
       - run: echo "END_TIME=$(date +%s)" >> $GITHUB_ENV 
       - name: Compute Build Time
-        run: |
-          DURATION=$((END_TIME - START_TIME))
-          echo "DURATION=$(DURATION)" >> $GITHUB_ENV
+        run: echo "DURATION=$((END_TIME - START_TIME))" >> $GITHUB_ENV
       - name: Send success notification
         if: success()
         run: |
           BUILD_TIME="$((DURATION/60))m $((DURATION%60))s"
-          REPO_NAME="$(basename $"GITHUB_REPOSITORY")"
+          REPO_NAME="$(basename "$GITHUB_REPOSITORY")"
           GH_PAGES_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPO_NAME}/"
           BRANCH=${{github.ref_name}}
           MESSAGE="<b>Success</b>
